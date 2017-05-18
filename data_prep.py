@@ -46,7 +46,7 @@ def parser():
 							l_score = ''
 							break
 
-						if setScore[-1:] == ')':
+						if setScore[-1] == ')':
 							l_score = l_score + setScore[2] + '-' + setScore[0] + '(' + setScore[-2] + ') '
 						else:
 							l_score = l_score + setScore[2] + '-' + setScore[0] + ' '
