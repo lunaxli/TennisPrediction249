@@ -15,7 +15,7 @@ def analyze_global():
     
     # read all csv files
     with open(output, 'w') as f_out:
-        f_out.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % ("name", "avg_seed", "avg_ht", "avg_age", "avg_rank", "avg_rank_pts", "avg_aces", "avg_dfs", "avg_svps", "avg_1stIn", "avg_1stWon", "avg_2ndWon", "avg_SvGms", "avg_bpSaved", "avg_bpFaced", "matchesPlayed"))
+        f_out.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % ("name", "avg_seed", "avg_ht", "avg_age", "avg_rank", "avg_rank_pts", "avg_aces", "avg_dfs", "avg_svpts", "avg_1stIn", "avg_1stWon", "avg_2ndWon", "avg_SvGms", "avg_bpSaved", "avg_bpFaced", "matchesPlayed"))
 
         for filename in glob.glob(path):
             with open(filename, 'r') as f_in:

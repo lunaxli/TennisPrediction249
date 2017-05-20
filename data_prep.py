@@ -143,7 +143,5 @@ def parser():
 					f_out.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % (w_key, w_name, l_name, w_id, l_id, w_seed, l_seed, w_ht, l_ht, w_age, l_age, w_rank, l_rank, w_rank_pts, l_rank_pts, w_ace, l_ace, w_df, l_df, w_svpt, l_svpt, w_1stIn, l_1stIn, w_1stWon, l_1stWon, w_2ndWon, l_2ndWon, w_SvGms, l_SvGms, w_bpSaved, l_bpSaved, w_bpFaced, l_bpFaced, w_age_diff, w_rank_diff, w_rank_point_diff, date, surface, minutes, "1", w_hand, l_hand, w_score, l_score, round_of, best_of, draw_size, tourney_level))
 					f_out.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % (l_key, l_name, w_name, l_id, w_id, l_seed, w_seed, l_ht, w_ht, l_age, w_age, l_rank, w_rank, l_rank_pts, w_rank_pts, l_ace, w_ace, l_df, w_df, l_svpt, w_svpt, l_1stIn, w_1stIn, l_1stWon, w_1stWon, l_2ndWon, w_2ndWon, l_SvGms, w_SvGms, l_bpSaved, w_bpSaved, l_bpFaced, w_bpFaced, -w_age_diff, -w_rank_diff, -w_rank_point_diff, date, surface, minutes, "0", l_hand, w_hand, l_score, w_score, round_of, best_of, draw_size, tourney_level))
 
-		# w_hand, l_hand, w_score, l_score, round_of, best_of, draw_size, tourney_level
-		#"hand", "o_hand", "score", "o_score", "round_of", "best_of", "draw_size", "tourney_level"))
 if __name__ == "__main__":
 	parser()

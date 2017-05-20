@@ -16,7 +16,7 @@ def analyze_weighted(a_year):
     
     # read all csv files
     with open(output, 'w') as f_out:
-        f_out.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % ("name", "avg_seed", "avg_ht", "avg_age", "avg_rank", "avg_rank_pts", "avg_aces", "avg_dfs", "avg_svps", "avg_1stIn", "avg_1stWon", "avg_2ndWon", "avg_SvGms", "avg_bpSaved", "avg_bpFaced", "wfactor"))
+        f_out.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % ("name", "avg_seed", "avg_ht", "avg_age", "avg_rank", "avg_rank_pts", "avg_aces", "avg_dfs", "avg_svpts", "avg_1stIn", "avg_1stWon", "avg_2ndWon", "avg_SvGms", "avg_bpSaved", "avg_bpFaced", "wfactor"))
 
         for filename in glob.glob(path):
             with open(filename, 'r') as f_in:
@@ -24,6 +24,8 @@ def analyze_weighted(a_year):
                 reader = csv.DictReader(f_in)
                 for row in reader:
                     gm_year = int(row['date']) / 10000
+                    if gm_year >= a_year:
+                        pass
                     fact = math.exp((a_year - gm_year) / 2)
                     wseed = fact*float(row['seed'])
                     wht = fact*float(row['ht'])

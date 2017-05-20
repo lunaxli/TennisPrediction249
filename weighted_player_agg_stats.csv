@@ -1,4 +1,4 @@
-name,avg_seed,avg_ht,avg_age,avg_rank,avg_rank_pts,avg_aces,avg_dfs,avg_svps,avg_1stIn,avg_1stWon,avg_2ndWon,avg_SvGms,avg_bpSaved,avg_bpFaced,wfactor
+name,avg_seed,avg_ht,avg_age,avg_rank,avg_rank_pts,avg_aces,avg_dfs,avg_svpts,avg_1stIn,avg_1stWon,avg_2ndWon,avg_SvGms,avg_bpSaved,avg_bpFaced,wfactor
 Sam Barry,0.0,0.0,21.342232662,574.924856069,56.6328270585,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,43.147633538
 Marc Rosset,1.19249045933,201.0,30.262028063,60.5026056023,703.916655874,9.80105842553,6.50446471135,74.4134523581,42.2635170899,32.8137411634,15.0930231916,11.8055143382,3.71034669548,5.91426182056,317471.440875
 Bob Borella,0.0,0.0,19.9397672827,1149.5,3.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,5961.91597408
