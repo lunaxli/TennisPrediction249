@@ -1,0 +1,47 @@
+Installing and Setting up a Spark Cluster
+
+Installation:
+1) Head to:
+https://spark.apache.org/downloads.html
+
+2) For the options (should be default):
+	1) 2.1.1 (May 02 2017)
+	2) Pre-built for Apache Hadoop 2.7 and later (Tried to get from source to work but had a bunch of weird Scala and Java dependency issues)
+	3) Direct Download
+	4) Download Spark. Go ahead and download the tgz
+
+3) Unzip the tgz
+4) cd spark-2.1.1-bin-hadoop2.7 
+5) good idea to add bin folder to your path
+6) use java 1.8 for spark
+
+
+Spark Cluster and Things
+1) you can go ahead and run ./bin/pyspark to start up a spark shell
+2) or, you can run ./bin/spark-submit <pysparkScript.py> to run a python script
+3) I added a SimpleApp.py you can test out. You need to change SPARK_HOME variable to your home though. 
+4) To start a cluster cd into the sbin. 
+5) You can start a master by running:
+
+	./start-master.sh
+
+this should start a master on port 8080. Check out localhost:8080 in a browser to see your cluster info.
+6) To add a worker to your master you can run:
+
+	./start-slave.sh <master-spark-URL>
+
+to find your master-spark-URL, look in the localhost:8080 dashboard and grab the URL listed first (not REST URL)
+7) After adding the worker, you can refresh your dashboard to see if it added correctly. 
+8) To run SimpleApp.py on your new cluster, change the line:
+
+	conf.setMaster("local")
+
+to:
+	
+	conf.setMaster("<master-spark-URL>")
+
+same URL as when adding a worker
+
+9) Now run SimpleApp.py using ./bin/spark-submit and if you refresh your dashboard, you should see that a job is running/has run. 
+
+
