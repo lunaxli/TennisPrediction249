@@ -44,4 +44,7 @@ same URL as when adding a worker
 
 9) Now run SimpleApp.py using ./bin/spark-submit and if you refresh your dashboard, you should see that a job is running/has run. 
 
+Additional notes: You might need to install the python module py4j and/or add the paths $SPARK_HOME/python and $SPARK_HOME/python/build to your PYTHONPAT.
+
+
 
