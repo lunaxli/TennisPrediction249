@@ -11,7 +11,7 @@ def analyze_weighted(a_year):
     # find input csv files and output files
     cwd = os.getcwd()
     path = cwd + "/atp_matches_features.csv"
-    output = cwd + "/weighted_player_agg_stats.csv"
+    output = cwd + "/weighted_player_agg_stats_" + str(a_year) + ".csv"
     result = {}
     
     # read all csv files
@@ -71,5 +71,7 @@ def analyze_weighted(a_year):
 
 
 if __name__ == "__main__":
-    analyze_weighted(2017)
+    for year in range(2000, 2018):
+        print "generating data assuming prediction year of", str(year)
+        analyze_weighted(int(year))
 
