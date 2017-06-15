@@ -4,12 +4,11 @@ import glob
 import csv
 import math
 
-
 def gen_test_data(a_year):
     
     # find input csv files and output files
     cwd = os.getcwd()
-    path = cwd + "/weighted_player_agg_stats.csv"
+    path = cwd + "/weighted_player_agg_stats_" + str(a_year) + ".csv"
     data = cwd + "/atp_matches_features.csv"
     output = cwd + "/test_data_" + str(a_year) + ".csv"
     player = {}
@@ -31,8 +30,10 @@ def gen_test_data(a_year):
                 for row in reader:
                     year = int(row['date']) / 10000
                     if year == a_year:
-                        name1 = row['name']; name2 = row['o_name']
-                        surface = row['surface']; date = row['date']
+                        name1 = row['name']
+                        name2 = row['o_name']
+                        surface = row['surface']
+                        date = row['date']
                         result = row['result']
                         avg_seed1 = player[name1]['avg_seed']
                         avg_seed2 = player[name2]['avg_seed']
