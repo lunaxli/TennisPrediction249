@@ -16,7 +16,7 @@ def analyze_weighted(a_year):
     
     # read all csv files
     with open(output, 'w') as f_out:
-        f_out.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % ("name", "avg_seed", "avg_ht", "avg_age", "avg_rank", "avg_rank_pts", "avg_aces", "avg_dfs", "avg_svpts", "avg_1stIn", "avg_1stWon", "avg_2ndWon", "avg_SvGms", "avg_bpSaved", "avg_bpFaced", "wfactor"))
+        f_out.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % ("name", "avg_seed", "avg_ht", "avg_age", "avg_rank", "avg_rank_pts", "avg_aces", "avg_dfs", "avg_svpts", "avg_1stIn", "avg_1stWon", "avg_2ndWon", "avg_SvGms", "avg_bpSaved", "avg_bpFaced", "hand", "wfactor"))
 
         for filename in glob.glob(path):
             with open(filename, 'r') as f_in:
@@ -42,10 +42,16 @@ def analyze_weighted(a_year):
                     wSvGms = fact*float(row['SvGms'])
                     wbpSaved = fact*float(row['bpSaved'])
                     wbpFaced = fact*float(row['bpFaced'])
+                    whand = ''
+              
+                    if row['hand'] == 'R':
+                        whand = '1'
+                    else:
+                        whand = '2'
 
                     # add player to dictionary
                     if result.get(row['name']) is None:
-                        result[row['name']] = {'count': fact, 'seed': wseed, 'ht': wht, 'age': wage, 'rank': wrank, 'rank_pts': wrank_pts, 'ace': wace, 'df': wdf, 'svpt': wsvpt, '1stIn': w1stIn, '1stWon': w1stWon, '2ndWon': w2ndWon, 'SvGms': wSvGms, 'bpSaved': wbpSaved, 'bpFaced': wbpFaced}
+                        result[row['name']] = {'count': fact, 'seed': wseed, 'ht': wht, 'age': wage, 'rank': wrank, 'rank_pts': wrank_pts, 'ace': wace, 'df': wdf, 'svpt': wsvpt, '1stIn': w1stIn, '1stWon': w1stWon, '2ndWon': w2ndWon, 'SvGms': wSvGms, 'bpSaved': wbpSaved, 'bpFaced': wbpFaced, 'hand': whand}
                     # sum up player stats
                     else:
                         result[row['name']]['count'] += fact
@@ -67,7 +73,7 @@ def analyze_weighted(a_year):
                 
         for player in result:
             wfactor = float(result[player]['count'])
-            f_out.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % (player, result[player]['seed']/wfactor, result[player]['ht']/wfactor, result[player]['age']/wfactor, result[player]['rank']/wfactor, result[player]['rank_pts']/wfactor, result[player]['ace']/wfactor, result[player]['df']/wfactor, result[player]['svpt']/wfactor, result[player]['1stIn']/wfactor, result[player]['1stWon']/wfactor, result[player]['2ndWon']/wfactor, result[player]['SvGms']/wfactor, result[player]['bpSaved']/wfactor, result[player]['bpFaced']/wfactor, wfactor))
+            f_out.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % (player, result[player]['seed']/wfactor, result[player]['ht']/wfactor, result[player]['age']/wfactor, result[player]['rank']/wfactor, result[player]['rank_pts']/wfactor, result[player]['ace']/wfactor, result[player]['df']/wfactor, result[player]['svpt']/wfactor, result[player]['1stIn']/wfactor, result[player]['1stWon']/wfactor, result[player]['2ndWon']/wfactor, result[player]['SvGms']/wfactor, result[player]['bpSaved']/wfactor, result[player]['bpFaced']/wfactor, result[player]['hand'], wfactor))
 
 
 

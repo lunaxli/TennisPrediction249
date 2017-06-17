@@ -22,7 +22,7 @@ def gen_test_data(a_year):
                 player[name] = row
 
     with open(output, 'w') as f_out:
-        f_out.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % ("name1", "name2", "surface", "date", "avg_seed1", "avg_seed2", "avg_ht1", "avg_ht2", "avg_age1", "avg_age2", "avg_rank1", "avg_rank2", "avg_rank_pts1", "avg_rank_pts2", "avg_aces1", "avg_aces2", "avg_dfs1", "avg_dfs2", "avg_svpts1", "avg_svpts2", "avg_1stIn1", "avg_1stIn2", "avg_1stWon1", "avg_1stWon2", "avg_2ndWon1", "avg_2ndWon2", "avg_SvGms1", "avg_SvGms2", "avg_bpSaved1", "avg_bpSaved2", "avg_bpFaced1", "avg_bpFaced2", "wfactor1", "wfactor2", "result"))
+        f_out.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % ("name1", "name2", "surface", "date", "minutes", "best_of", "draw_size", "avg_seed1", "avg_seed2", "avg_ht1", "avg_ht2", "avg_age1", "avg_age2", "avg_rank1", "avg_rank2", "avg_rank_pts1", "avg_rank_pts2", "avg_aces1", "avg_aces2", "avg_dfs1", "avg_dfs2", "avg_svpts1", "avg_svpts2", "avg_1stIn1", "avg_1stIn2", "avg_1stWon1", "avg_1stWon2", "avg_2ndWon1", "avg_2ndWon2", "avg_SvGms1", "avg_SvGms2", "avg_bpSaved1", "avg_bpSaved2", "avg_bpFaced1", "avg_bpFaced2", "hand1", "hand2", "wfactor1", "wfactor2", "result"))
 
         for filename in glob.glob(data):
             with open(filename, 'r') as f_in:
@@ -34,6 +34,9 @@ def gen_test_data(a_year):
                         name2 = row['o_name']
                         surface = row['surface']
                         date = row['date']
+                        minutes = row['minutes']
+                        best_of = row['best_of']
+                        draw_size = row['draw_size']
                         result = row['result']
                         avg_seed1 = player[name1]['avg_seed']
                         avg_seed2 = player[name2]['avg_seed']
@@ -63,10 +66,12 @@ def gen_test_data(a_year):
                         avg_bpSaved2 = player[name2]['avg_bpSaved']
                         avg_bpFaced1 = player[name1]['avg_bpFaced']
                         avg_bpFaced2 = player[name2]['avg_bpFaced']
+                        hand1 = player[name1]['hand']
+                        hand2 = player[name2]['hand']
                         wfactor1 = player[name1]['wfactor']
                         wfactor2 = player[name2]['wfactor']
 
-                        f_out.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % (name1, name2, surface, date, avg_seed1, avg_seed2, avg_ht1, avg_ht2, avg_age1, avg_age2, avg_rank1, avg_rank2, avg_rank_pts1, avg_rank_pts2, avg_aces1, avg_aces2, avg_dfs1, avg_dfs2, avg_svpts1, avg_svpts2, avg_1stIn1, avg_1stIn2, avg_1stWon1, avg_1stWon2, avg_2ndWon1, avg_2ndWon2, avg_SvGms1, avg_SvGms2, avg_bpSaved1, avg_bpSaved2, avg_bpFaced1, avg_bpFaced2, wfactor1, wfactor2, result))
+                        f_out.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % (name1, name2, surface, date, minutes, best_of, draw_size, avg_seed1, avg_seed2, avg_ht1, avg_ht2, avg_age1, avg_age2, avg_rank1, avg_rank2, avg_rank_pts1, avg_rank_pts2, avg_aces1, avg_aces2, avg_dfs1, avg_dfs2, avg_svpts1, avg_svpts2, avg_1stIn1, avg_1stIn2, avg_1stWon1, avg_1stWon2, avg_2ndWon1, avg_2ndWon2, avg_SvGms1, avg_SvGms2, avg_bpSaved1, avg_bpSaved2, avg_bpFaced1, avg_bpFaced2, hand1, hand2, wfactor1, wfactor2, result))
 
 
 

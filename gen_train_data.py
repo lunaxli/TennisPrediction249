@@ -25,7 +25,7 @@ def generate_training_data(years_and_players, min_year, max_year):
 	output = cwd + "/train_data_" + str(min_year) + "-" + str(max_year) + ".csv"
 
 	with open(output, 'w') as f_out:
-		f_out.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % ("name1", "name2", "surface", "date", "avg_seed1", "avg_seed2", "avg_ht1", "avg_ht2", "avg_age1", "avg_age2", "avg_rank1", "avg_rank2", "avg_rank_pts1", "avg_rank_pts2", "avg_aces1", "avg_aces2", "avg_dfs1", "avg_dfs2", "avg_svpts1", "avg_svpts2", "avg_1stIn1", "avg_1stIn2", "avg_1stWon1", "avg_1stWon2", "avg_2ndWon1", "avg_2ndWon2", "avg_SvGms1", "avg_SvGms2", "avg_bpSaved1", "avg_bpSaved2", "avg_bpFaced1", "avg_bpFaced2", "wfactor1", "wfactor2", "result"))
+		f_out.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % ("name1", "name2", "surface", "date", "minutes", "best_of", "draw_size", "avg_seed1", "avg_seed2", "avg_ht1", "avg_ht2", "avg_age1", "avg_age2", "avg_rank1", "avg_rank2", "avg_rank_pts1", "avg_rank_pts2", "avg_aces1", "avg_aces2", "avg_dfs1", "avg_dfs2", "avg_svpts1", "avg_svpts2", "avg_1stIn1", "avg_1stIn2", "avg_1stWon1", "avg_1stWon2", "avg_2ndWon1", "avg_2ndWon2", "avg_SvGms1", "avg_SvGms2", "avg_bpSaved1", "avg_bpSaved2", "avg_bpFaced1", "avg_bpFaced2", "hand1", "hand2", "wfactor1", "wfactor2", "result"))
 
 		with open(filename, 'r') as f_in:
 			# read input as csv dictionary
@@ -44,6 +44,9 @@ def generate_training_data(years_and_players, min_year, max_year):
 				name2 = row['o_name']
 				surface = row['surface']
 				date = row['date']
+				minutes = row['minutes']
+				best_of = row['best_of']
+				draw_size = row['draw_size']
 				result = row['result']
 				avg_seed1 = player1Data['avg_seed']
 				avg_seed2 = player2Data['avg_seed']
@@ -73,10 +76,12 @@ def generate_training_data(years_and_players, min_year, max_year):
 				avg_bpSaved2 = player2Data['avg_bpSaved']
 				avg_bpFaced1 = player1Data['avg_bpFaced']
 				avg_bpFaced2 = player2Data['avg_bpFaced']
+				hand1 = player1Data['hand']
+				hand2 = player2Data['hand']
 				wfactor1 = player1Data['wfactor']
 				wfactor2 = player2Data['wfactor']
 
-				f_out.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % (name1, name2, surface, date, avg_seed1, avg_seed2, avg_ht1, avg_ht2, avg_age1, avg_age2, avg_rank1, avg_rank2, avg_rank_pts1, avg_rank_pts2, avg_aces1, avg_aces2, avg_dfs1, avg_dfs2, avg_svpts1, avg_svpts2, avg_1stIn1, avg_1stIn2, avg_1stWon1, avg_1stWon2, avg_2ndWon1, avg_2ndWon2, avg_SvGms1, avg_SvGms2, avg_bpSaved1, avg_bpSaved2, avg_bpFaced1, avg_bpFaced2, wfactor1, wfactor2, result))
+				f_out.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % (name1, name2, surface, date, minutes, best_of, draw_size, avg_seed1, avg_seed2, avg_ht1, avg_ht2, avg_age1, avg_age2, avg_rank1, avg_rank2, avg_rank_pts1, avg_rank_pts2, avg_aces1, avg_aces2, avg_dfs1, avg_dfs2, avg_svpts1, avg_svpts2, avg_1stIn1, avg_1stIn2, avg_1stWon1, avg_1stWon2, avg_2ndWon1, avg_2ndWon2, avg_SvGms1, avg_SvGms2, avg_bpSaved1, avg_bpSaved2, avg_bpFaced1, avg_bpFaced2, hand1, hand2, wfactor1, wfactor2, result))
 
 if __name__ == '__main__':
 	years_and_players = {}

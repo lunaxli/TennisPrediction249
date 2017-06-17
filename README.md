@@ -5,7 +5,15 @@
 
 ChiSqSelector Feature Selection
 
-# 0 = hard
-# 1 = grass
-# 2 = clay
-# 3 = carpet
+1 = hard
+2 = grass
+3 = clay
+4 = carpet
+
+1 = R
+2 = L
+
+Data not used:
+Score
+Tourney Level
+Round Of

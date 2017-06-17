@@ -140,13 +140,13 @@ def parser():
 					# 2 = clay
 					# 3 = carpet
 					if row['surface'] == 'Hard':
-						surface = 0
-					elif row['surface'] == 'Grass':
 						surface = 1
-					elif row['surface'] == 'Clay':
+					elif row['surface'] == 'Grass':
 						surface = 2
-					else:
+					elif row['surface'] == 'Clay':
 						surface = 3
+					else:
+						surface = 4
 					
 					minutes = row['minutes']
 					if not minutes: minutes = 0
