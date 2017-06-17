@@ -4,8 +4,19 @@ from pyspark.ml.linalg import Vectors
 from pyspark.ml.classification import LogisticRegression
 import csv
 
-SPARK_HOME = "~/Desktop/Spark/spark-2.1.1-bin-hadoop2.7/"
-MASTER_URL = "spark://ubuntu:7077"
+### path to SPARK_HOME
+KEVIN_HOME = ""
+LUNA_HOME = "~/Desktop/Spark/spark-2.1.1-bin-hadoop2.7/"
+WILL_HOME = "~/spark-2.1.1-bin-hadoop2.7/"
+###
+SPARK_HOME = WILL_HOME
+
+### the URL given in the spark UI
+KEVIN_URL = ""
+LUNA_URL = "spark://ubuntu:7077"
+WILL_URL = "spark://losangeles.linux.ucla.edu:7077"
+###
+MASTER_URL = WILL_URL
 
 conf = SparkConf()
 conf.setMaster(MASTER_URL)
@@ -14,22 +25,29 @@ conf.set("spark.executor.memory", "1g")
 sc = SparkContext(conf = conf)
 sqlContext = SQLContext(sc)
 
-logFile = "/home/guest/Desktop/Spark/sparkScripts/log.log"
-resultFile = "/home/guest/Desktop/Spark/sparkScripts/results.txt"
 
+### some directory you specify to hold data/results
+KEVIN_PREFIX = ""
+LUNA_PREFIX = "/home/guest/Desktop/Spark/sparkScripts"
+WILL_PREFIX = "/home/wlai/accel_world"
+###
+path_prefix = WILL_PREFIX
+
+logFile = path_prefix + "/log.log"
+resultFile = path_prefix + "/results.txt"
 
 trainingData = []
 testData = []
 
 
-with open("/home/guest/Desktop/Spark/sparkScripts/training.csv", "rb") as f:
+with open(path_prefix + "/training.csv", "rb") as f:
 	reader = csv.reader(f, delimiter=",")
 	# skip first line
 	next(f)
 	for i, line in enumerate(reader):
 		trainingData.append((float(line[39]), line[0], line[1], Vectors.dense(line[2::])))	
 
-with open("/home/guest/Desktop/Spark/sparkScripts/test.csv", "rb") as f:
+with open(path_prefix + "/test.csv", "rb") as f:
 	reader = csv.reader(f, delimiter=",")
 	# skip first line
 	next(f)
