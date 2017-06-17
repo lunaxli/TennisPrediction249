@@ -15,33 +15,35 @@ sc.textFile(SPARK_HOME + "README.md")
 
 # create dataframe for feature selection
 cwd = os.getcwd()
-path = cwd + "/atp_matches_features.csv"
+path = cwd + "/atp_matches_features_half.csv"
 dfFeaturesArray = []
+players = {}
 idCount = 0
 
 for filename in glob.glob(path):
-    with open(filename, 'r') as f_in:
-        # read input as csv dictionary
-        reader = csv.DictReader(f_in)
-        for row in reader:
-        	# create features vector, and dataframe row
-        	dfRowFeatures = Vectors.dense(float(row["surface"]), float(row["seed"]), float(row["o_seed"]), float(row["ht"]), float(row["o_ht"]), float(row["age"]), float(row["o_age"]), float(row["rank"]), float(row["o_rank"]), float(row["rank_pts"]), float(row["o_rank_pts"]), float(row["ace"]), float(row["o_ace"]), float(row["df"]), float(row["o_df"]), float(row["svpt"]), float(row["o_svpt"]), float(row["1stIn"]), float(row["o_1stIn"]), float(row["1stWon"]), float(row["o_1stWon"]), float(row["2ndWon"]), float(row["o_2ndWon"]), float(row["SvGms"]), float(row["o_SvGms"]), float(row["bpSaved"]), float(row["o_bpSaved"]), float(row["bpFaced"]), float(row["o_bpFaced"]))
-        	dfRow = (idCount, dfRowFeatures, float(row["result"]))
-        	idCount += 1
-        	dfFeaturesArray.append(dfRow)
+	with open(filename, 'r') as f_in:
+		# read input as csv dictionary
+		reader = csv.DictReader(f_in)
+		for row in reader:
+			# create features vector, and dataframe row
+			dfRowFeatures = Vectors.dense(float(row["surface"]), float(row["seed"]), float(row["o_seed"]), float(row["ht"]), float(row["o_ht"]), float(row["age"]), float(row["o_age"]), float(row["rank"]), float(row["o_rank"]), float(row["rank_pts"]), float(row["o_rank_pts"]), float(row["ace"]), float(row["o_ace"]), float(row["df"]), float(row["o_df"]), float(row["svpt"]), float(row["o_svpt"]), float(row["1stIn"]), float(row["o_1stIn"]), float(row["1stWon"]), float(row["o_1stWon"]), float(row["2ndWon"]), float(row["o_2ndWon"]), float(row["SvGms"]), float(row["o_SvGms"]), float(row["bpSaved"]), float(row["o_bpSaved"]), float(row["bpFaced"]), float(row["o_bpFaced"]))
+			dfRow = (idCount, dfRowFeatures, float(row["result"]))
+			idCount += 1
+			dfFeaturesArray.append(dfRow)
 
 # create dataframe 	
 df = spark.createDataFrame(dfFeaturesArray, ["id", "features", "result"])
 
 # specify selector method
-selector = ChiSqSelector(numTopFeatures=10, featuresCol="features", outputCol="selectedFeatures", labelCol="result")
-# selector = ChiSqSelector(selectorType="fpr", fpr=0.01, featuresCol="features", outputCol="selectedFeatures", labelCol="result")
+# selector = ChiSqSelector(numTopFeatures=10, featuresCol="features", outputCol="selectedFeatures", labelCol="result")
+selector = ChiSqSelector(featuresCol="features", outputCol="selectedFeatures", labelCol="result")
+selector.setSelectorType("fpr").setFpr(0.9)
 
 # generate results
 result = selector.fit(df).transform(df)
 
 print("ChiSqSelector output with top %d features selected" % selector.getNumTopFeatures())
-result.show(20, False)
+result.show(40, False)
 
 # Features considered from atp_matches_features.csv
 # surface, seed, o_seed, ht, o_ht, age, o_age, rank, o_rank, rank_pts, o_rank_pts, ace, o_ace, df, o_df, svpt, o_svpt, 1stIn, o_1stIn, 1stWon, o_1stWon, 2ndWon, o_2ndWon, SvGms, o_SvGms, bpSaved, o_bpSaved, bpFaced, o_bpFaced, result

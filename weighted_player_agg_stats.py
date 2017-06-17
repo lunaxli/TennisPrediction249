@@ -26,6 +26,7 @@ def analyze_weighted(a_year):
                     gm_year = int(row['date']) / 10000
                     if gm_year >= a_year:
                         pass
+
                     fact = math.exp((a_year - gm_year) / 2)
                     wseed = fact*float(row['seed'])
                     wht = fact*float(row['ht'])
