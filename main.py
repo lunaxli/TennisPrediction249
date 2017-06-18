@@ -63,7 +63,10 @@ with open(logFile, "w") as log:
 
     prediction = model.transform(test)
     with open(resultFile, "w") as results:
-        r = prediction.select("features", "label", "probability", "prediction").rdd.map(lambda row: "features=%s, label=%s -> prob=%s, prediction=%s\n" % (row.features, row.label, row.probability, row.prediction))
+        res = prediction.select("features", "label", "probability", "prediction").rdd
+        acc = res.filter(lambda (f, label, prob, pred): label == pred).count() / float(testData.count())
+        results.write('Accuracy: ' + str(acc) + '\n\n')
+        r = res.map(lambda row: "features=%s, label=%s -> prob=%s, prediction=%s\n" % (row.features, row.label, row.probability, row.prediction))
         for line in r.collect():
             results.write(line)
 
