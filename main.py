@@ -39,38 +39,33 @@ resultFile = path_prefix + "/results.txt"
 trainingData = []
 testData = []
 
+train = sc.textFile(path_prefix + '/training.csv')
+header = train.first()
+train = train.filter(lambda row: row != header)
+trainingData = train.map(lambda line: line.split(',')).map(lambda line: (float(line[39]), line[0], line[1], Vectors.dense(line[2::])))
 
-with open(path_prefix + "/training.csv", "rb") as f:
-	reader = csv.reader(f, delimiter=",")
-	# skip first line
-	next(f)
-	for i, line in enumerate(reader):
-		trainingData.append((float(line[39]), line[0], line[1], Vectors.dense(line[2::])))	
-
-with open(path_prefix + "/test.csv", "rb") as f:
-	reader = csv.reader(f, delimiter=",")
-	# skip first line
-	next(f)
-	for i, line in enumerate(reader):
-		testData.append((float(line[39]), line[0], line[1], Vectors.dense(line[2::])))
+test = sc.textFile(path_prefix + '/test.csv')
+header = test.first()
+test = test.filter(lambda row: row != header)
+testData = test.map(lambda line: line.split(',')).map(lambda line: (float(line[39]), line[0], line[1], Vectors.dense(line[2::])))
 
 
 training = sqlContext.createDataFrame(trainingData, ["label", "name1", "name2", "features"])
 
 with open(logFile, "w") as log:
-	lr = LogisticRegression(maxIter=10, regParam=0.01)
-	log.write("LogisticRegression params:\n" + str(lr.explainParams()) + "\n")
-	model = lr.fit(training)
-	log.write("Model was fit using params: ")
-	log.write(str(model.extractParamMap())) # this may not be working, not sure if str cast works haha
+    lr = LogisticRegression(maxIter=10, regParam=0.01)
+    log.write("LogisticRegression params:\n" + str(lr.explainParams()) + "\n")
+    model = lr.fit(training)
+    log.write("Model was fit using params: ")
+    log.write(str(model.extractParamMap())) # this may not be working, not sure if str cast works haha
 
-	test = sqlContext.createDataFrame(testData, ["label", "name1", "name2", "features"])
+    test = sqlContext.createDataFrame(testData, ["label", "name1", "name2", "features"])
 
-	prediction = model.transform(test)
-	result = prediction.select("features", "label", "probability", "prediction").collect()
-	with open(resultFile, "w") as results:
-		for row in result:
-			results.write("features=%s, label=%s -> prob=%s, prediction=%s\n" % (row.features, row.label, row.probability, row.prediction))
+    prediction = model.transform(test)
+    with open(resultFile, "w") as results:
+        r = prediction.select("features", "label", "probability", "prediction").rdd.map(lambda row: "features=%s, label=%s -> prob=%s, prediction=%s\n" % (row.features, row.label, row.probability, row.prediction))
+        for line in r.collect():
+            results.write(line)
 
 
 print "\n<----FINISHED---->\n"
