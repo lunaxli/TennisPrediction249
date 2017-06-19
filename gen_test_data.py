@@ -4,11 +4,15 @@ import glob
 import csv
 import math
 
-def gen_test_data(a_year):
+def gen_test_data(a_year, weighted=True):
     
     # find input csv files and output files
     cwd = os.getcwd()
-    path = cwd + "/weighted_player_agg_stats_" + str(a_year) + ".csv"
+    if weighted == True:
+        path = cwd + "/weighted_player_agg_stats_" + str(a_year) + ".csv"
+    else:
+        path = cwd + "/unweighted_player_agg_stats_" + str(a_year) + ".csv"
+
     data = cwd + "/atp_matches_features.csv"
     output = cwd + "/test_data_" + str(a_year) + ".csv"
     player = {}
@@ -76,5 +80,5 @@ def gen_test_data(a_year):
 
 
 if __name__ == "__main__":
-    gen_test_data(2017)
+    gen_test_data(2017, True)
 

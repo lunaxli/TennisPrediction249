@@ -23,14 +23,14 @@ KEVIN_HOME = ""
 LUNA_HOME = "~/Desktop/Spark/spark-2.1.1-bin-hadoop2.7/"
 WILL_HOME = "~/spark-2.1.1-bin-hadoop2.7/"
 ###
-SPARK_HOME = LUNA_HOME
+SPARK_HOME = WILL_HOME
 
 ### the URL given in the spark UI
 KEVIN_URL = ""
 LUNA_URL = "spark://ubuntu:7077"
 WILL_URL = "spark://losangeles.linux.ucla.edu:7077"
 ###
-MASTER_URL = LUNA_URL
+MASTER_URL = WILL_URL
 
 conf = SparkConf()
 conf.setMaster(MASTER_URL)
@@ -45,7 +45,7 @@ KEVIN_PREFIX = ""
 LUNA_PREFIX = "/home/guest/Desktop/Spark/sparkScripts"
 WILL_PREFIX = "/home/wlai/accel_world"
 ###
-path_prefix = LUNA_PREFIX
+path_prefix = WILL_PREFIX
 
 logFile = path_prefix + "/log.log"
 resultFile = path_prefix + "/results.txt"
