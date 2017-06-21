@@ -9,12 +9,12 @@ def gen_test_data(a_year, weighted=True):
     # find input csv files and output files
     cwd = os.getcwd()
     if weighted == True:
-        path = cwd + "/weighted_player_agg_stats_" + str(a_year) + ".csv"
+        path = cwd + "/w_agg_files/weighted_player_agg_stats_" + str(a_year) + ".csv"
     else:
-        path = cwd + "/unweighted_player_agg_stats_" + str(a_year) + ".csv"
+        path = cwd + "/uw_agg_files/unweighted_player_agg_stats_" + str(a_year) + ".csv"
 
     data = cwd + "/atp_matches_features.csv"
-    output = cwd + "/test_data_" + str(a_year) + ".csv"
+    output = cwd + "/uw_test_data/test_data_" + str(a_year) + ".csv"
     player = {}
 
     # read all csv file and store in dictionary
@@ -80,5 +80,5 @@ def gen_test_data(a_year, weighted=True):
 
 
 if __name__ == "__main__":
-    gen_test_data(2017, True)
+    gen_test_data(2017, False)
 

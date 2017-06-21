@@ -19,18 +19,18 @@ VERBOSE = False
 ###
 
 ### path to SPARK_HOME
-KEVIN_HOME = ""
+KEVIN_HOME = "~/Users/kevinnguyen/Documents/ucla/cs249-Spring/project/spark/spark-2.1.1-bin-hadoop2.7"
 LUNA_HOME = "~/Desktop/Spark/spark-2.1.1-bin-hadoop2.7/"
 WILL_HOME = "~/spark-2.1.1-bin-hadoop2.7/"
 ###
-SPARK_HOME = WILL_HOME
+SPARK_HOME = KEVIN_HOME
 
 ### the URL given in the spark UI
-KEVIN_URL = ""
+KEVIN_URL = "spark://Kevins-MacBook-Pro.local:7077"
 LUNA_URL = "spark://ubuntu:7077"
 WILL_URL = "spark://losangeles.linux.ucla.edu:7077"
 ###
-MASTER_URL = WILL_URL
+MASTER_URL = KEVIN_URL
 
 conf = SparkConf()
 conf.setMaster(MASTER_URL)
@@ -41,11 +41,11 @@ sqlContext = SQLContext(sc)
 
 
 ### some directory you specify to hold data/results
-KEVIN_PREFIX = ""
+KEVIN_PREFIX = "/Users/kevinnguyen/Documents/ucla/cs249-Spring/project/results"
 LUNA_PREFIX = "/home/guest/Desktop/Spark/sparkScripts"
 WILL_PREFIX = "/home/wlai/accel_world"
 ###
-path_prefix = WILL_PREFIX
+path_prefix = KEVIN_PREFIX
 
 logFile = path_prefix + "/log.log"
 resultFile = path_prefix + "/results.txt"

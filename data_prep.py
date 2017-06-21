@@ -14,6 +14,7 @@ def parser():
 	path = cwd + "/tennis_atp/atp_matches_2[0-9]*.csv"
 	output = owd + "/atp_matches_features.csv"
 
+	match_count = 0
 	#score
 
 	# read all csv files
@@ -27,7 +28,6 @@ def parser():
 				# read input as csv dictionary
 				reader = csv.DictReader(f_in)
 				for row in reader:
-					
 					#Tourney information
 					round_of = row['round']
 					best_of = row['best_of']
