@@ -9,14 +9,14 @@ from pyspark.ml.classification import NaiveBayes
 import csv
 
 ### path to SPARK_HOME
-KEVIN_HOME = ""
+KEVIN_HOME = "~/Users/kevinnguyen/Documents/ucla/cs249-Spring/project/spark/spark-2.1.1-bin-hadoop2.7"
 LUNA_HOME = "~/Desktop/Spark/spark-2.1.1-bin-hadoop2.7/"
 WILL_HOME = "~/spark-2.1.1-bin-hadoop2.7/"
 ###
 SPARK_HOME = WILL_HOME
 
 ### the URL given in the spark UI
-KEVIN_URL = ""
+KEVIN_URL = "spark://Kevins-MacBook-Pro.local:7077"
 LUNA_URL = "spark://ubuntu:7077"
 WILL_URL = "spark://losangeles.linux.ucla.edu:7077"
 ###
@@ -31,7 +31,7 @@ sqlContext = SQLContext(sc)
 
 
 ### some directory you specify to hold data/results
-KEVIN_PREFIX = ""
+KEVIN_PREFIX = "/Users/kevinnguyen/Documents/ucla/cs249-Spring/project/results"
 LUNA_PREFIX = "/home/guest/Desktop/Spark/sparkScripts"
 WILL_PREFIX = "/home/wlai/accel_world"
 ###
@@ -94,20 +94,25 @@ with open(logFile, "w") as log:
         gbt_arr = []
         nb_arr = []
         for line in lr_res.collect():
-            lr_arr.append((line[0], line[1], line[2][1]))
+            #lr_arr.append((line[0], line[1], line[2][1]))
+            lr_arr.append((line[0], line[1], line[3]))
         for line in dt_res.collect():
-            dt_arr.append((line[0], line[1], line[2][1]))
+            #dt_arr.append((line[0], line[1], line[2][1]))
+            dt_arr.append((line[0], line[1], line[3]))
         for line in rf_res.collect():
-            rf_arr.append((line[0], line[1], line[2][1]))
+            #rf_arr.append((line[0], line[1], line[2][1]))
+            rf_arr.append((line[0], line[1], line[3]))
         for line in gbt_res.collect():
+            #gbt_arr.append((line[0], line[1], line[2]))
             gbt_arr.append((line[0], line[1], line[2]))
         for line in nb_res.collect():
-            nb_arr.append((line[0], line[1], line[2][1]))
+            #nb_arr.append((line[0], line[1], line[2][1]))
+            nb_arr.append((line[0], line[1], line[3]))
 
         count = len(lr_arr)
         correct = 0
         NUM_MODELS = 5
-        weights = [1, 1, 2, 2, 1]
+        weights = [1, 1, 1, 1, 1]
         for i in range(count):
             pred_sum = weights[0]*lr_arr[i][2] + weights[1]*dt_arr[i][2] + weights[2]*rf_arr[i][2] + weights[3]*gbt_arr[i][2] + weights[4]*nb_arr[i][2]
             pred = 0
