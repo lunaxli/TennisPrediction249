@@ -70,7 +70,7 @@ with open(logFile, "w") as log:
     test = sqlContext.createDataFrame(testData, ["label", "name1", "name2", "features"])
 
     with open(resultFile, "w") as results:
-        if(not MODEL or "lr" in MODEL):
+        if (not MODEL or "lr" in MODEL):
             results.write('Logistic Regression\n\n')
             lr = LogisticRegression(maxIter=10, regParam=0.01)
             log.write("LogisticRegression params:\n" + str(lr.explainParams()) + "\n")
@@ -82,11 +82,11 @@ with open(logFile, "w") as log:
             acc = res.filter(lambda (f, label, prob, pred): label == pred).count() / float(testData.count())
             results.write('Accuracy: ' + str(acc) + '\n\n')
             r = res.map(lambda row: "features=%s, label=%s -> prob=%s, prediction=%s\n" % (row.features, row.label, row.probability, row.prediction))
-            if(VERBOSE):
+            if (VERBOSE):
                 for line in r.collect():
                     results.write(line)
         
-        if(not MODEL or "dtc" in MODEL):
+        if (not MODEL or "dtc" in MODEL):
             results.write('\n\n------------------------------------------------------\n\n')
             results.write('Decision Tree Classifier\n\n')
             dt = DecisionTreeClassifier(labelCol="label", featuresCol="features")
@@ -96,11 +96,11 @@ with open(logFile, "w") as log:
             acc = res.filter(lambda (f, label, prob, pred): label == pred).count() /float(testData.count())
             results.write('Accuracy: ' + str(acc) + '\n\n')
             r = res.map(lambda row: "features=%s, label=%s -> prob=%s, prediction=%s\n" % (row.features, row.label, row.probability, row.prediction))
-            if(VERBOSE):
+            if (VERBOSE):
                 for line in r.collect():
                     results.write(line)   
 
-        if(not MODEL or "rfc" in MODEL):
+        if (not MODEL or "rfc" in MODEL):
             results.write('\n\n------------------------------------------------------\n\n')
             results.write('Random Forest Classifier\n\n')
             rf = RandomForestClassifier(labelCol="label", featuresCol="features", numTrees=10)
@@ -110,11 +110,11 @@ with open(logFile, "w") as log:
             acc = res.filter(lambda (f, label, prob, pred): label == pred).count() /float(testData.count())
             results.write('Accuracy: ' + str(acc) + '\n\n')
             r = res.map(lambda row: "features=%s, label=%s -> prob=%s, prediction=%s\n" % (row.features, row.label, row.probability, row.prediction)) 	
-            if(VERBOSE):
+            if (VERBOSE):
                 for line in r.collect():
                     results.write(line)
 
-        if(not MODEL or "gbt" in MODEL):
+        if (not MODEL or "gbt" in MODEL):
             results.write('\n\n------------------------------------------------------\n\n')
             results.write('Gradient Boosted Tree Classifier\n\n')
             gbt = GBTClassifier(labelCol="label", featuresCol="features", maxIter=10)
@@ -124,11 +124,11 @@ with open(logFile, "w") as log:
             acc = res.filter(lambda (f, label, pred): label == pred).count() /float(testData.count())
             results.write('Accuracy: ' + str(acc) + '\n\n')
             r = res.map(lambda row: "features=%s, label=%s -> prediction=%s\n" % (row.features, row.label, row.prediction))
-            if(VERBOSE):
+            if (VERBOSE):
                 for line in r.collect():
                     results.write(line)
         
-        if(not MODEL or "nb" in MODEL):
+        if (not MODEL or "nb" in MODEL):
             results.write('\n\n------------------------------------------------------\n\n')
             results.write('Naive Bayes\n\n')
             nb = NaiveBayes(smoothing=1.0, modelType="multinomial")
@@ -138,7 +138,7 @@ with open(logFile, "w") as log:
             acc = res.filter(lambda (f, label, prob, pred): label == pred).count() /float(testData.count())
             results.write('Accuracy: ' + str(acc) + '\n\n')
             r = res.map(lambda row: "features=%s, label=%s -> prob=%s, prediction=%s\n" % (row.features, row.label, row.probability, row.prediction))
-            if(VERBOSE):
+            if (VERBOSE):
                 for line in r.collect():
                     results.write(line)
 
